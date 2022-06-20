@@ -13,6 +13,7 @@
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-scripts": "5.0.1",
+    "sass": "^1.52.3",
     "typescript": "^4.7.4",
     "web-vitals": "^2.1.4"
   },
@@ -20,12 +21,72 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "storybook": "start-storybook -p 6006 -s public",
+    "build-storybook": "build-storybook -s public"
   },
   "eslintConfig": {
     "extends": [
       "react-app",
-      "react-app/jest"
+      "react-app/jest",
+      "airbnb-typescript",
+      "prettier"
+    ],
+    "parserOptions": {
+      "project": "./tsconfig.json"
+    },
+    "ignorePatterns": [
+      "stories.js",
+      "*.stories.js",
+      "*.stories.ts"
+    ],
+    "overrides": [
+      {
+        "files": [
+          "**/*.stories.*"
+        ],
+        "rules": {
+          "import/no-anonymous-default-export": "off",
+          "react/prefer-stateless-function": 0,
+          "react/jsx-filename-extension": 0,
+          "react/jsx-one-expression-per-line": 0,
+          "react/prop-types": 0,
+          "react/react-in-jsx-scope": 0,
+          "jsx-a11y/label-has-associated-control": [
+            "error",
+            {
+              "required": {
+                "some": [
+                  "nesting",
+                  "id"
+                ]
+              }
+            }
+          ],
+          "jsx-a11y/label-has-for": [
+            "error",
+            {
+              "required": {
+                "some": [
+                  "nesting",
+                  "id"
+                ]
+              }
+            }
+          ]
+        },
+        "env": {
+          "browser": true
+        }
+      },
+      {
+        "files": [
+          "**/*.stories.*"
+        ],
+        "rules": {
+          "import/no-anonymous-default-export": "off"
+        }
+      }
     ]
   },
   "browserslist": {
@@ -39,5 +100,23 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "devDependencies": {
+    "@storybook/addon-actions": "^6.5.9",
+    "@storybook/addon-essentials": "^6.5.9",
+    "@storybook/addon-interactions": "^6.5.9",
+    "@storybook/addon-links": "^6.5.9",
+    "@storybook/builder-webpack5": "^6.5.9",
+    "@storybook/manager-webpack5": "^6.5.9",
+    "@storybook/node-logger": "^6.5.9",
+    "@storybook/preset-create-react-app": "^4.1.2",
+    "@storybook/react": "^6.5.9",
+    "@storybook/testing-library": "^0.0.13",
+    "babel-plugin-named-exports-order": "^0.0.2",
+    "dotenv-webpack": "^7.1.0",
+    "eslint-config-airbnb-typescript": "^17.0.0",
+    "eslint-config-prettier": "^8.5.0",
+    "prop-types": "^15.8.1",
+    "webpack": "^5.73.0"
   }
 }

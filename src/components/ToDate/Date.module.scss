@@ -1,0 +1,363 @@
+.dateTitle {
+    margin: 0 auto;
+    padding: 0px 5px 0px 15px;
+    text-align: center;
+    font-weight: 700;
+    width: 40%;
+    font-size: 26px;
+    display: flex;
+    font-family: 'LeferiPoint-BlackObliqueA';
+}
+
+@font-face {
+    font-family: 'Vitro_core';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_20-10-21@1.0/Vitro_core.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+
+.dateClass {
+    margin: 0 auto;
+    padding: 0;
+    text-transform: uppercase;
+    font-weight: 700;
+    width: 40%;
+    display: flex;
+    font-family: 'SDSamliphopangche_Outline';
+    position: relative;
+}
+
+.toDoList {
+    overflow: auto;
+}
+
+.date {
+    margin: 0;
+    padding: 0;
+    font-size: 144px;
+    width: 175px;
+    text-align: center;
+    vertical-align: middle;
+
+    &:hover {
+        color: #77aa89;
+    }
+}
+
+.dateMonth {
+    font-size: 48px;
+    padding-top: 30px;
+
+    p {
+        margin: 0px 26px;
+        padding: 0;
+
+        &:hover {
+            color: #366973;
+        }
+    }
+}
+
+.header {
+    margin-top: 18px;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.header .inputContainer {
+    display: flex;
+    flex-direction: column;
+}
+
+.header input {
+    width: 200px;
+    height: 40px;
+    border-bottom-left-radius: 8px;
+    border-top-left-radius: 8px;
+    padding-left: 10px;
+    font-size: 17px;
+    border: 1px solid wheat;
+}
+
+.addTask {
+    width: 70px;
+    height: 87px;
+    border: none;
+    border-bottom-right-radius: 8px;
+    border-top-right-radius: 8px;
+    padding-left: 10px;
+    background-color: lightblue;
+    cursor: pointer;
+
+    &:hover {
+        background-color: #77aa89;
+        color: #fff;
+    }
+}
+
+.task {
+    width: 500px;
+    height: 50px;
+    display: flex;
+    color: black;
+    margin: 15px;
+    font-family: 'Helvetica';
+}
+
+.task .content {
+    flex: 80%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.task .content span {
+    display: grid;
+    place-items: center;
+    border: 1px solid white;
+    width: 100%;
+    height: 100%;
+    font-size: 18px;
+    border-right: none;
+    background-color: #fff;
+    overflow: auto;
+}
+
+.task button {
+    flex: 20%;
+    height: 100%;
+    border: none;
+    background-color: lightseagreen;
+    border-top-right-radius: 8px;
+    border-bottom-right-radius: 8px;
+    color: white;
+    cursor: pointer;
+}
+
+
+
+@media screen and (min-width:1158px) {
+    .toDoList {
+        font-size: 48px;
+        padding-top: 30px;
+        background-color: bisque;
+        position: absolute;
+        top: 110%;
+        width: 80%;
+        max-width: 100%;
+        height: 400%;
+        flex: 70%;
+        display: flex;
+        align-items: center;
+        padding-top: 50px;
+        flex-direction: column;
+
+        p {
+            margin: 0;
+            padding: 0;
+            text-align: center;
+        }
+    }
+
+    .task {
+        width: 280px;
+    }
+}
+
+@media screen and (max-width: 1157px) {
+    .toDoList {
+        font-size: 38px;
+        padding-top: 30px;
+        background-color: bisque;
+        position: absolute;
+        display: flex;
+        justify-content: center;
+        top: 100%;
+        width: 100%;
+        height: 400%;
+    }
+
+    .todoListGrid {
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-start;
+        position: absolute;
+        top: 40%;
+        left: 12%;
+    }
+
+    .header {
+        position: absolute;
+        top: 18%;
+    }
+
+    .inputContainer {
+        position: relative;
+    }
+
+    .task {
+
+        width: 300px;
+    }
+}
+
+@media screen and (max-width: 1003px) {
+    .task {
+        width: 280px;
+    }
+
+    .todoListGrid {
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-start;
+        position: absolute;
+        top: 40%;
+        left: 3%;
+    }
+}
+
+@media screen and (max-width:1143px) {
+    .todoListGrid {
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-start;
+        position: absolute;
+        top: 40%;
+        left: 13%;
+    }
+}
+
+@media screen and (max-width: 1049px) {
+    .todoListGrid {
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-start;
+        position: absolute;
+        top: 40%;
+        left: 7%;
+    }
+}
+
+@media screen and (max-width: 851px) {
+    .toDoList {
+        font-size: 18px;
+        width: 130%;
+        padding-bottom: 30px;
+        justify-content: center;
+    }
+
+    .todoListGrid {
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-start;
+        position: absolute;
+        top: 40%;
+        left: 20%;
+    }
+
+    .task {
+        width: 190px;
+    }
+
+    .date {
+        font-size: 88px;
+    }
+
+    .dateMonth {
+        font-size: 28px;
+    }
+
+    .header input {
+        width: 100px;
+        height: 30px;
+        font-size: 12px;
+    }
+
+    .addTask {
+        height: 70px;
+        font-size: 12px;
+    }
+}
+
+@media screen and (max-width: 440px) {
+    .dateClass {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .toDoList {
+        width: 250%;
+        overflow: auto;
+    }
+
+    .dateMonth {
+        padding: 0;
+
+        p {
+            text-align: center;
+        }
+    }
+
+    .header {
+        margin: 0;
+    }
+
+    .header input {
+        width: 70px;
+        height: 26px;
+        font-size: 7px;
+    }
+
+    .addTask {
+        height: 60px;
+        width: 50px;
+        font-size: 8px;
+    }
+
+    .todoListGrid {
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-start;
+        position: absolute;
+        top: 32%;
+        left: 2%;
+        width: 100%;
+        border-color: #366973;
+    }
+
+    .task {
+        width: 84%;
+        height: 40px;
+        font-size: 8px;
+    }
+
+    .task .content span {
+        font-size: 8px;
+        text-align: center;
+        border-color: #366973;
+        overflow: auto;
+    }
+
+    .task button {
+        flex: none;
+        width: 25%;
+        border-color: #366973;
+    }
+}
+
+@font-face {
+    font-family: 'SDSamliphopangche_Outline';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts-20-12@1.0/SDSamliphopangche_Outline.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'LeferiPoint-BlackObliqueA';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2201-2@1.0/LeferiPoint-BlackObliqueA.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}

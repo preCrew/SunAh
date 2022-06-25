@@ -1,3 +1,4 @@
+import React, { Component } from 'react';
 import Date, { DateProps } from './Date';
 
 

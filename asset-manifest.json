@@ -1,0 +1,15 @@
+{
+  "files": {
+    "main.css": "/SunAh.git/static/css/main.62fe25eb.css",
+    "main.js": "/SunAh.git/static/js/main.f26a655d.js",
+    "static/js/787.97a945da.chunk.js": "/SunAh.git/static/js/787.97a945da.chunk.js",
+    "index.html": "/SunAh.git/index.html",
+    "main.62fe25eb.css.map": "/SunAh.git/static/css/main.62fe25eb.css.map",
+    "main.f26a655d.js.map": "/SunAh.git/static/js/main.f26a655d.js.map",
+    "787.97a945da.chunk.js.map": "/SunAh.git/static/js/787.97a945da.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.62fe25eb.css",
+    "static/js/main.f26a655d.js"
+  ]
+}

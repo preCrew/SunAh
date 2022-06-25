@@ -1,3 +1,357 @@
+### [제네릭]
++ 리액트의 컴포넌트를 만들때 자주 활용되는 특징이다
++ 특히, 한가지 타입보다 여러 가지 타입에서 동작하는 컴포넌트를 생성하는데 사용된다
+
+#### 제네릭의 한 줄 정의와 예시
++ 제네릭이란 타입을 마치 함수의 파라미터처럼 사용하는 것을 의미한다
+```js
+function getText<T>(text: T): T {
+  return text;
+}
+```
+```
+먼저 함수의 이름 바로 뒤에 <T> 라는 코드를 추가했습니다. 
+그리고 함수의 인자와 반환 값에 모두 T 라는 타입을 추가합니다. 
+이렇게 되면 함수를 호출할 때 넘긴 타입에 대해 타입스크립트가 추정할 수 있게 됩니다. 
+따라서, 함수의 입력 값에 대한 타입과 출력 값에 대한 타입이 동일한지 검증할 수 있게 됩니다.
+```
++ 위 함수는 제네릭 기본 문법이 적용된 형태이다
++ ```getText<string>('hi')``` 를 호출 했을 때 함수에서 제네릭이 어떻게 동작하는지 살펴보자
++ 먼저 함수에서 제네릭 타입이 <string>으로 된다
+
+```js
+ function getText<string>(text: T): T {
+  return text;
+}       
+```
++ 그리고 나서 함수의 인자로 ```hi``` 라는 값을 아래와 같이 넘기게 되면
+
+```js
+function getText<string>(text: string): string {
+  return text;
+}        
+```        
++ 위와 같은 코드가 처음의 기본제네릭 코드와 같은 의미를 가지게 된다
+        
+#### 제네릭을 사용하는 이유 
+        
+```js
+function logText(text: any): any {
+  return text;
+}        
+``` 
++ 위의 코드는 함수의 인자로 어떤 타입이 들어갔고 어떤 값이 반환되는지는 알 수가 없다
++ 왜냐하면 any라는 타입은 타입 검사를 하지 않기 때문
+        
++ 이러한 문제점을 해결할 수 있는 것이 제네릭이다
+```js
+function logText<T>(text: T): T {
+  return text;
+}        
+```        
++ 두가지 방법으로 호출할수 있다        
+```js
+// #1
+const text = logText<string>("Hello Generic");
+// #2
+const text = logText("Hello Generic");
+```                                
+
+#### 제네릭 타입 변수
+```js
+function logText<T>(text: T): T {
+  console.log(text.length); // Error: T doesn't have .length
+  return text;
+}        
+```   
++ 위 코드가 오류를 발생시키는 이유는 text에 .length가 있다는 단서는 어디에도 없기 때문이다
++ 그래서 이런 경우에는 아래와 같이 제네릭에 타입을 줄 수가 있다
+
+```js
+function logText<T>(text: T[]): T[] {
+  console.log(text.length); // 제네릭 타입이 배열이기 때문에 `length`를 허용합니다.
+  return text;
+}        
+```        
+
+혹은 더 명시적으로
+아래와 같이 사용할수 있다        
+        
+```js
+function logText<T>(text: Array<T>): Array<T> {
+  console.log(text.length);
+  return text;
+}        
+```        
+
+```
+함수에 [1,2,3]처럼 숫자로 이뤄진 배열을 받으면 반환 값으로 number를 돌려주는 것이죠.
+이런 방식으로 제네릭을 사용하면 꽤 유연한 방식으로 함수의 타입을 정의해줄 수 있습니다.        
+```        
+#### 제네릭 타입
+
++ 제네릭 인터페이스에 대해 알아보자 아래의 두 코드는 같은 의미이다        
+
+```js
+function logText<T>(text: T): T {
+  return text;
+}
+// #1
+let str: <T>(text: T) => T = logText;
+// #2
+let str: {<T>(text: T): T} = logText;        
+```     
++ 위와 같은 변형 방식으로 제네릭 인터페이스 코드를 다음과 같이 작성할 수 있습니다.
+        
+```js
+interface GenericLogTextFn {
+  <T>(text: T): T;
+}
+function logText<T>(text: T): T {
+  return text;
+}
+let myString: GenericLogTextFn = logText; // Okay        
+```  
+
+또는         
+        
+```js
+ interface GenericLogTextFn<T> {
+  (text: T): T;
+}
+function logText<T>(text: T): T {
+  return text;
+}
+let myString: GenericLogTextFn<string> = logText;       
+```     
+
+#### 제네릭 클래스
+          
+```js
+class GenericMath<T> {
+  pi: T;
+  sum: (x: T, y: T) => T;
+}
+
+let math = new GenericMath<number>();
+```       
+```
+제네릭 클래스를 선언할 때 클래스 이름 오른쪽에 <T>를 붙여줍니다.
+그리고 해당 클래스로 인스턴스를 생성할 때 
+타입에 어떤 값이 들어갈 지 지정하면 됩니다.
+```       
+```
+조금 전에 살펴본 인터페이스처럼 
+제네릭 클래스도 클래스 안에 정의된 속성들이 
+정해진 타입으로 잘 동작하게 보장할 수 있습니다.          
+```
+          
+#### 제네릭 제약 조건
+잠시 이전 코드를 살펴보자
+```js
+function logText<T>(text: T): T {
+  console.log(text.length); // Error: T doesn't have .length
+  return text;
+}          
+```       
+```
+인자의 타입에 선언한 T는 아직 어떤 타입인지 구체적으로 정의하지 않았기 때문에 length 코드에서 오류가 납니다. 
+이럴 때 만약 해당 타입을 정의하지 않고도 length 속성 정도는 허용하려면 아래와 같이 작성합니다.
+```
+```js
+interface LengthWise {
+  length: number;
+}
+
+function logText<T extends LengthWise>(text: T): T {
+  console.log(text.length);
+  return text;
+}
+```
++ 위와 같이 작성하게 되면 타입에 대한 강제는 아니지만 length에 대해 동작하는 인자만 넘겨받을 수 있게 된다 
+          
+```js
+logText(10); // Error, 숫자 타입에는 `length`가 존재하지 않으므로 오류 발생
+logText({ length: 0, value: 'hi' }); // `text.length` 코드는 객체의 속성 접근과 같이 동작하므로 오류 없음          
+```          
+#### 객체의 속성을 제약하는 방법
+          
+```js
+function getProperty<T, O extends keyof T>(obj: T, key: O) {
+  return obj[key];  
+}
+let obj = { a: 1, b: 2, c: 3 };
+
+getProperty(obj, "a"); // okay
+getProperty(obj, "z"); // error: "z"는 "a", "b", "c" 속성에 해당하지 않습니다.          
+```          
+제네릭을 선언할 때 <O extends keyof T> 부분에서<
+첫 번째 인자로 받는 객체에 없는 속성들은 접근할 수 없게끔 제한하였다         
+          
+### [클래스 타입정의]
+
+#### Accessor (접근자)
+
++ 아래 간단한 코드를 제시한다
++ 구성 목록은 다음과 같다
+
+
++ Class
+  - field (변수 초기화)
+  - get
+  - set
+
+```js
+class Developer {
+  private name: string;
+  
+  get name(): string {
+    return this.name;
+  }
+
+  set name(newValue: string) {
+    if (newValue && newValue.length > 5) {
+      throw new Error('이름이 너무 깁니다');
+    }
+    this.name = newValue;
+  }
+}
+const josh = new Developer();
+josh.name = 'Josh Bolton'; // Error
+josh.name = 'Josh';
+```
+
+#### Abstract Class (추상클래스)
++ 추상 클래스(Abstract Class)는 인터페이스와 비슷한 역할을 하면서도 조금 다른 특징을 갖는다
++ 추상 클래스는 특정 클래스의 상속 대상이 되는 클래스이며 좀 더 상위 레벨에서 속성, 메서드의 모양을 정의한다
+
+```js
+abstract class Developer {
+  abstract coding(): void; // 'abstract'가 붙으면 상속 받은 클래스에서 무조건 구현해야 함
+  drink(): void {
+    console.log('drink sth');
+  }
+}
+
+class FrontEndDeveloper extends Developer {
+  coding(): void {
+    // Developer 클래스를 상속 받은 클래스에서 무조건 정의해야 하는 메서드
+    console.log('develop web');
+  }
+  design(): void {
+    console.log('design web');
+  }
+}
+const dev = new Developer(); // error: cannot create an instance of an abstract class
+const josh = new FrontEndDeveloper();
+josh.coding(); // develop web
+josh.drink(); // drink sth
+josh.design(); // design web
+```
+
+### [연산자를 이용한 타입정의]
+#### 유니온 타입 (OR 논리연산이라 생각하면 편함)
+
++ 유니온 타입(Union Type)이란 자바스크립트의 OR 연산자(||)와 같이 A이거나 B이다 라는 의미의 타입이다.
++ 함수의 파라미터 text에는 문자열 타입이나 숫자 타입이 모두 올 수 있도록 만들수 있다
+
+```js
+function logText(text: string | number) {
+  // ...
+}
+```
+
++ 아래의 경우는 any를 사용할경우 toFixe() 기능을 사용하지 못한다 (소수점 자릿수에 따라 자르는 기능)
+
+```js
+// any를 사용하는 경우
+function getAge(age: any) {
+  age.toFixed(); // 에러 발생, age의 타입이 any로 추론되기 때문에 숫자 관련된 API를 작성할 때 코드가 자동 완성되지 않는다.
+  return age;
+}
+```
++ 유니온 타입을 사용하여 if문에 따라 toFixe()기능을 사용할지 하지 않을지 결정할수 있어 오류가 생기지 않는다
++ 
+```js
+// 유니온 타입을 사용하는 경우
+function getAge(age: number | string) {
+  if (typeof age === 'number') {
+    age.toFixed(); // 정상 동작, age의 타입이 `number`로 추론되기 때문에 숫자 관련된 API를 쉽게 자동완성 할 수 있다.
+    return age;
+  }
+  if (typeof age === 'string') {
+    return age;
+  }
+  return new TypeError('age must be number or string');
+}
+```
+#### Intersection Type (AND 논리연산이라 생각하면 편함)
++ 인터섹션 타입(Intersection Type)은 여러 타입을 모두 만족하는 하나의 타입을 의미함
++ interface 두개를 정의하고 하나의 변수에 합치는것을 말함
+
+```js
+interface Person {
+  name: string;
+  age: number;
+}
+interface Developer {
+  name: string;
+  skill: number;
+}
+type Capt = Person & Developer;
+```
++ 결과적으로 Capt 라는 타입은 아래와 같은 구성을 가진다
+
+```
+{
+  name: string;
+  age: number;
+  skill: string;
+}
+```
+
+#### Union Type을 쓸 때 주의할 점
++ 아마 논리적으로 유니온 타입은 OR, 인터섹션은 AND라고 생각할텐데 인터페이스와 같은 타입을 다룰 때는 이와 같은 논리적 사고를 주의해야한다
+
+```js
+interface Person {
+  name: string;
+  age: number;
+}
+interface Developer {
+  name: string;
+  skill: string;
+}
+function introduce(someone: Person | Developer) {
+  someone.name; // O 정상 동작
+  someone.age; // X 타입 오류
+  someone.skill; // X 타입 오류
+}
+```
+
++ 여기서 introduce() 함수의 파라미터인 somenone의 타입을 Person, Developer 둘중 하나로 정의되도록 만들었다
++ 유니온 타입은 A도 될 수 있고 B도 될 수 있는 타입이지라고 생각하면 파라미터의 타입이 Person도 되고 Developer도 될테니까 
++ 함수 안에서 당연히 이 인터페이스들이 제공하는 속성들인 age나 skill를 사용할 수 있겠지라고 생각할 수 있는데 이는 **오류를 발생시킨다**
++ 타입스크립트 관점에서는 introduce() 함수를 호출하는 시점에 Person 타입이 올지 Developer 타입이 올지 알 수가 없다
++ 때문에 어느 타입이 들어오든 간에 오류가 안 나는 방향으로 타입을 추론하게 된다
+
+#### Intersection Type을 쓸 때 주의할 점
+
+```js
+const capt: Person = { name: 'capt', age: 100 };
+introduce(capt); // 만약 `introduce` 함수 안에서 `someone.skill` 속성을 접근하고 있으면 함수에서 오류 발생
+
+const tony: Developer = { name: 'tony', skill: 'iron making' };
+introduce(tony); // 만약 `introduce` 함수 안에서 `someone.age` 속성을 접근하고 있으면 함수에서 오류 발생
+
+function introduce(someone: Person | Developer) {
+  console.log(someone.name); // O 정상 동작
+}
+```
+
++ 결과적으로 introduce() 함수 안에서는 별도의 타입 가드(Type Guard)를 이용하여 타입의 범위를 좁히지 않는 이상 
++ 기본적으로는 Person과 Developer 두 타입에 공통적으로 들어있는 속성인 name만 접근할 수 있다.
+
 ### [인터페이스]
 
 + 인터페이스를 쓰지 않았을 경우 ↓↓
@@ -23,6 +377,7 @@
         }
         let person = { name: 'Capt', age: 28 };
         logAge(person); //
+        
 
 + 타입 스크립트 인터페이스 특징
     - 인자로 받는 객체의 속성 개수와 인터페이스의 속성 개수를 일치시키지 않아도 된다

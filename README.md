@@ -6,6 +6,15 @@ https://csn-ah22.github.io/todolist/
 + Language: TypeScript, Dart-Sass
 + TypeScript Version: 4.7.4
 + Sass Version: 1.53.0
+<br>
+<b>기능설명</b> 
+<br>
+<br>
+<img src="https://user-images.githubusercontent.com/70833455/177358195-9bbd7e7a-7057-4c52-b0c8-91d77caccd2b.png" width="500" height="200"></img>
+
++ 오늘의 날짜, 요일, 월 이 순서대로 표시됨
++ 할일 추가 및 삭제 기능
++ 마감 날짜 추가 기능
 
 ### [제네릭]
 + 리액트의 컴포넌트를 만들때 자주 활용되는 특징이다

@@ -1,3 +1,12 @@
+### ToDoList 배포
+http://localhost:3000/
+
+<b>skills</b>
++ Library: React
++ Language: TypeScript, Dart-Sass
++ TypeScript Version: 4.7.4
++ Sass Version: 1.53.0
+
 ### [제네릭]
 + 리액트의 컴포넌트를 만들때 자주 활용되는 특징이다
 + 특히, 한가지 타입보다 여러 가지 타입에서 동작하는 컴포넌트를 생성하는데 사용된다

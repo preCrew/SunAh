@@ -1,6 +1,8 @@
 ### ToDoList 배포
 https://csn-ah22.github.io/todolist/
 
+[![DeepScan grade](https://deepscan.io/api/teams/18269/projects/21572/branches/624626/badge/grade.svg)](https://deepscan.io/dashboard#view=project&tid=18269&pid=21572&bid=624626)
+
 <b>skills</b>
 + Library: React
 + Language: TypeScript, Dart-Sass
